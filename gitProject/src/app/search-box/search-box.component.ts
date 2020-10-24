@@ -24,7 +24,7 @@ export class SearchBoxComponent implements OnInit {
       if (this.timer){
         clearTimeout(this.timer);
       }
-      this.timer = setTimeout(this.searchUsers, 400, event.target.value, this.userService);
+      this.timer = setTimeout(this.searchUsers, 1000, event.target.value, this.userService);
     }else {
       this.searchUsers(event.target.value, this.userService);
     }
