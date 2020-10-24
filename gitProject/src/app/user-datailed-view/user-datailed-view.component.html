@@ -5,8 +5,8 @@
       <mat-card-subtitle>Here you have some information about the user</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <mat-accordion>
-        <mat-expansion-panel>
+      <mat-accordion multi>
+        <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Basic user information
@@ -22,7 +22,7 @@
             <p>Repositories URL: <a href="{{user.repos_url}}" target="_blank">{{user.repos_url}}</a></p>
           </div>
         </mat-expansion-panel>
-        <mat-expansion-panel>
+        <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
               User repositories
@@ -40,7 +40,7 @@
             </mat-list-item>
           </mat-list>
         </mat-expansion-panel>
-        <mat-expansion-panel>
+        <mat-expansion-panel [expanded]="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
               User followers
