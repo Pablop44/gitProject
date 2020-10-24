@@ -17,7 +17,7 @@ export class SearchBoxComponent implements OnInit {
 
   constructor(userService: UserServiceService, private route : ActivatedRoute, private router: Router) {
     this.userService = userService
-    this.optionUser = [new User("Albovy", null, null, "https://avatars3.githubusercontent.com/u/55434173?v=4", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)]
+    this.optionUser = []
   }
 
   ngOnInit(): void {
@@ -28,13 +28,14 @@ export class SearchBoxComponent implements OnInit {
       if (this.timer){
         clearTimeout(this.timer);
       }
-      this.timer = setTimeout(this.searchUsers, 1000, event.target.value, this.userService);
+      this.optionUser = []
+      this.timer = setTimeout(this.searchUsers, 500, event.target.value, this.userService, this.optionUser);
     }else {
-      this.searchUsers(event.target.value, this.userService);
+      this.searchUsers(event.target.value, this.userService, this.optionUser);
     }
   }
 
-  searchUsers(username, userService) {
+  searchUsers(username, userService, optionUser) {
     if (username.length > 0) {
       this.params = {
         q: username
@@ -42,15 +43,9 @@ export class SearchBoxComponent implements OnInit {
       userService.searchUserByName(this.params)
       .subscribe(
         response=>{
-          this.optionUser = []
-          const optionUserUploaded = []
           response.items.forEach(element => {
-            const userToPush = new User(element.login, element.id, element.node_id, element.avatar_url, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
-            optionUserUploaded.push(userToPush)
+            optionUser.push(new User(element.login, element.id, element.node_id, element.avatar_url, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null))
           });
-          this.optionUser = optionUserUploaded
-          this.optionUser = [...this.optionUser];
-          console.log(this.optionUser)
         },
         error=>{
           console.log(error)

@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ToolbarTopComponent implements OnInit {
 
+  isDarkTheme: boolean = false;
+
   constructor(private route : ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -17,4 +19,7 @@ export class ToolbarTopComponent implements OnInit {
     this.router.navigateByUrl("/");
   }
 
+  changeTheme () {
+    this.isDarkTheme = !this.isDarkTheme
+  }
 }

@@ -5,7 +5,7 @@ import { SearchBoxComponent } from './search-box/search-box.component';
 
 const routes: Routes = [
   { path: '', component: SearchBoxComponent },
-  { path: 'user/:username', component: UserDatailedViewComponent }
+  { path: 'user/:username', component: UserDatailedViewComponent, data: {animation: 'user'} }
 ];
 
 @NgModule({
