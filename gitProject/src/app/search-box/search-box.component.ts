@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from 'src/services/user/user-service.service';
+import { User } from 'src/app/models/User';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-box',
@@ -11,9 +13,11 @@ export class SearchBoxComponent implements OnInit {
   params: any
   private timer: any;
   private delaySearch: boolean = true;
+  optionUser: any[]
 
-  constructor(userService: UserServiceService) {
+  constructor(userService: UserServiceService, private route : ActivatedRoute, private router: Router) {
     this.userService = userService
+    this.optionUser = [new User("Albovy", null, null, "https://avatars3.githubusercontent.com/u/55434173?v=4", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)]
   }
 
   ngOnInit(): void {
@@ -38,7 +42,15 @@ export class SearchBoxComponent implements OnInit {
       userService.searchUserByName(this.params)
       .subscribe(
         response=>{
-          console.log(response)
+          this.optionUser = []
+          const optionUserUploaded = []
+          response.items.forEach(element => {
+            const userToPush = new User(element.login, element.id, element.node_id, element.avatar_url, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+            optionUserUploaded.push(userToPush)
+          });
+          this.optionUser = optionUserUploaded
+          this.optionUser = [...this.optionUser];
+          console.log(this.optionUser)
         },
         error=>{
           console.log(error)
@@ -47,4 +59,13 @@ export class SearchBoxComponent implements OnInit {
     }
   }
 
+  getSelectedValue(username:string){
+    if (username != undefined && username != null) {
+      this.redirectDetailedView(username)
+    }
+  }
+
+  redirectDetailedView(username) {
+    this.router.navigateByUrl("/user/" + username);
+  }
 }

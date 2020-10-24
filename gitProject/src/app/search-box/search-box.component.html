@@ -6,8 +6,17 @@
   <mat-card-content>
     <mat-form-field class="example-full-width">
       <mat-label>Username</mat-label>
-      <input matInput placeholder="I.e. pablop44" (keyup)="changeUsername($event)">
+      <input matInput placeholder="I.e. pablop44" (keyup)="changeUsername($event)" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getSelectedValue($event.option.value)">
+        <mat-option *ngFor="let user of optionUser" [value]="user.login">
+          <img class="example-option-img" aria-hidden [src]="user.avatar_url" height="25">
+          <span>{{user.login}}</span>
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
+  <p *ngFor="let user of optionUser">
+    {{user.login}}
+  </p>
   </mat-card-content>
 </mat-card>
 

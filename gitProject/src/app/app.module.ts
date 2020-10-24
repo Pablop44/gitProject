@@ -51,12 +51,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { UserDatailedViewComponent } from './user-datailed-view/user-datailed-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarTopComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    UserDatailedViewComponent
   ],
   imports: [
     HttpClientModule,

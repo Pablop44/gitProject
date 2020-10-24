@@ -21,18 +21,20 @@ export class BasicServiceService {
 
   get (url, params) {
 
-    this.params = Object.keys(params).map(function(k) {
-      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k])
-    }).join('&');
-
-    console.log(params)
-    console.log(this.params)
+    if (params != null) {
+      this.params = Object.keys(params).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(params[k])
+      }).join('&');
+      this.params = '?' + this.params
+    } else {
+      this.params = ''
+    }
 
     const httpOptions = {
       headers: this.headers
     };
 
-    return this.httpClient.get(this.apiDirection + url + '?' + this.params, httpOptions);
+    return this.httpClient.get(this.apiDirection + url + this.params, httpOptions);
   }
 
   post (url, params, json) {

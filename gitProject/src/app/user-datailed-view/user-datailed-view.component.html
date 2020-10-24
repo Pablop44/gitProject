@@ -1,0 +1,64 @@
+<div class="grid-container">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>User: {{username}}</mat-card-title>
+      <mat-card-subtitle>Here you have some information about the user</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Basic user information
+            </mat-panel-title>
+            <mat-panel-description>
+              This is a summary of the content
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="user != undefined">
+            <img class="example-option-img" aria-hidden [src]="user.avatar_url" height="100">
+            <p>Username: {{user.login}}</p>
+            <p>GitHub URL: <a href="{{user.html_url}}" target="_blank">{{user.html_url}}</a></p>
+            <p>Repositories URL: <a href="{{user.repos_url}}" target="_blank">{{user.repos_url}}</a></p>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              User repositories
+            </mat-panel-title>
+            <mat-panel-description>
+              Basic information about user respositories
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let repository of repositories">
+              <mat-icon mat-list-icon>folder</mat-icon>
+              <div mat-line>{{repository.name}}</div>
+              <div mat-line>{{repository.language}} </div>
+              <div mat-line><a href="{{repository.html_url}}" target="_blank">{{repository.html_url}}</a></div>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              User followers
+            </mat-panel-title>
+            <mat-panel-description>
+              Basic information about user followers
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let follower of followers">
+              <img class="example-option-img" aria-hidden [src]="follower.avatar_url" height="25">
+              <div mat-line>Username: {{follower.login}}</div>
+              <div mat-line>GitHub URL: <a href="{{follower.html_url}}" target="_blank">{{follower.html_url}}</a></div>
+              <div mat-line>Repositories URL: <a href="{{follower.repos_url}}" target="_blank">{{follower.repos_url}}</a></div>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>
